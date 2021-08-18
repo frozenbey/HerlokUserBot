@@ -32,8 +32,10 @@ async def destek(client:Client, message:Message):
         await message.edit(mesaj)
         return
 
-    await message.edit(CMD_HELP[girilen_yazi[1]])
-
+    try:
+        await message.edit(CMD_HELP[girilen_yazi[1]])
+    except KeyError:
+        await message.edit("`Böyle bir plugin bulamadım. Lütfen kontrol et.`")
 
 @Client.on_message(filters.command(['log'], ['!','.','/']) & filters.me)
 async def logsalla(client:Client, message:Message):
