@@ -33,11 +33,11 @@
 
 ```
 #include <std/disclaimer.h>
-/**
+
     Userbottan dolayı; Telegram hesabınız yasaklanabilir.
     Bu bir açık kaynaklı projedir, yaptığınız her işlemden kendiniz sorumlusunuz. Kesinlikle UserBot yöneticileri sorumluluk kabul etmemektedir.
-    ThorUserBot kurarak bu sorumlulukları kabul etmiş sayılırsınız.
-/**
+    TexeraUserBot kurarak bu sorumlulukları kabul etmiş sayılırsınız.
+
 ```
 
 ### Geliştiriciler
