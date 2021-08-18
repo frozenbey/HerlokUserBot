@@ -1,0 +1,11 @@
+heroku3
+setuptools
+pyrogram
+asyncio
+aiohttp
+tgcrypto
+python-dotenv
+pytz
+beautifulsoup4
+gitpython
+speedtest-cli
