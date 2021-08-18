@@ -34,7 +34,7 @@ async def update_requirements():
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-@Client.on_message(filters.command("update",".") & filters.outgoing)
+@Client.on_message(filters.command("update",".") & filters.me)
 async def ustream(client:Client, message:Message):
     ".update komutu ile botunun güncel olup olmadığını denetleyebilirsin."
 
