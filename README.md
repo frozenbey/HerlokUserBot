@@ -18,11 +18,11 @@
 
 **Android:** 
 
-#`bash <(curl -L https://bit.ly/ThorAndroid)`
+`bash <(curl -L https://bit.ly/TexeraUserBot)`
 
 **Online Kurulum**
 
-#[![Run on Repl.it](https://replit.com/badge/github/ThorDev/OnlineAuto)](https://replit.com/@ThorDev/OnlineAuto)
+[![Run on Repl.it](https://replit.com/badge/github/ThorDev/OnlineAuto)](https://replit.com/@sherlock-exe/TexeraOnline#main.sh)
 
 ### Elle Kurulum 
 
