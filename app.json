@@ -1,0 +1,71 @@
+{
+    "name": "Texera UserBot",
+    "description": "Telegramın en gelişmiş userbotu.",
+    "logo": "https://telegra.ph/file/7447d3f91a035ecadfa80.jpg",
+    "keywords": [
+      "telegram",
+      "pyrogram",
+      "userbot",
+      "texerauserbot"
+    ],
+    "repository": "https://github.com/sherlock-exe/TexeraUserBot",
+    "success_url": "https://t.me/TexeraSupport",
+    "stack": "container",
+    "env": {
+      "ENV": {
+        "description": "Bunu HERHANGİ BİR ŞEY olarak ayarlamak, ortam değişkenlerini etkinleştirir",
+        "value": "texera",
+        "required": true
+      },
+      "API_ID": {
+        "description": "Bu değeri şuradan alın: https://my.telegram.org",
+        "value": "",
+        "required": true
+      },
+      "API_HASH": {
+        "description": "Bu değeri şuradan alın: https://my.telegram.org",
+        "value": "",
+        "required": true
+      },
+      "STRING_SESSION": {
+        "description": "Python3 StringSessionOlustur.py'yi yerel olarak çalıştırarak bu değeri oluşturun..",
+        "value": "",
+        "required": true
+      },
+      "SESSION_ADI": {
+        "description": "Botunuza isim verin (fark etmez)",
+        "value": "TexeraUserbot",
+        "required": true
+      },
+      "INDIRME_ALANI": {
+        "description": "Geçici indirme alanı, dosya sistemini içeren eklentiler için gereklidir..",
+        "value": "downloads/",
+        "required": true
+      },
+      "HEROKU_APIKEY": {
+        "description": "Heroku API Key, 'https://dashboard.heroku.com/account' adresinden alın.",
+        "value": "",
+        "required": true
+      },
+      "HEROKU_APPNAME": {
+        "description": "Heroku uygulama adını buraya ekleyin.",
+        "required": true
+      },
+      "HEROKU": {
+        "description": "Bot heroku üzerinde çalışıyorsa True localde çalışıyorsa false yazın.",
+        "value": "True",
+        "required": true
+      }
+    },
+    "buildpacks": [
+      {
+        "url": "heroku/python"
+      }
+    ],
+    "formation": {
+      "worker": {
+        "quantity": 1,
+        "size": "free"
+      }
+    }
+  }
