@@ -6,6 +6,9 @@ import asyncio
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
+
+
+
 requirements_path = path.join(path.dirname(path.dirname(path.dirname(__file__))), 'requirements.txt')
 
 async def gen_chlog(repo, diff):
@@ -31,7 +34,7 @@ async def update_requirements():
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-@Client.on_message(filters.regex(r"^\.update(?: |$)(.*)") & filters.outgoing)
+@Client.on_message(filters.command("update",".") & filters.outgoing)
 async def ustream(client:Client, message:Message):
     ".update komutu ile botunun güncel olup olmadığını denetleyebilirsin."
 
