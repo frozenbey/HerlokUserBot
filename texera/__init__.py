@@ -77,8 +77,12 @@ for dosya in os.listdir("./texera/plugins/"):
         continue
     tum_eklentiler.append(dosya.replace('.py',''))
 
-def baslangic() -> None:
+def baslangic() -> None:   
     texera.start()
+      
+    me = texera.get_me()
+    idm = me.id  
+      
     time.sleep(1.5)
     TexeraSohbet = -1001524686970
     TexeraUserBot = -1001560054521
