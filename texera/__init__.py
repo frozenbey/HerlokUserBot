@@ -51,7 +51,7 @@ if STRING_SESSION.startswith('-') or len(STRING_SESSION) < 351:
 
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.WARNING,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 LOGGER = logging.getLogger("pyrogram").setLevel(logging.WARNING)
