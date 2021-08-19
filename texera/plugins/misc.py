@@ -33,4 +33,4 @@ async def restart(client:Client, message:Message):
     execl(sys.executable, sys.executable, *sys.argv)
     return
 
-CmdHelp("misc").add_command("kapat", None, "Botu kapatır.").add_command("restart", None, "Botu yeniden başlatır.")
+CmdHelp("misc").add_command("kapat", None, "Botu kapatır.").add_command("restart", None, "Botu yeniden başlatır.").add()
