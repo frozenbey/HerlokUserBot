@@ -12,7 +12,7 @@ def eklentilerim() -> str:
     sayfa = [sorted(list(eklentiler))[i:i + 5] for i in range(0, len(sorted(list(eklentiler))), 5)]
         
     for i in sayfa:
-        string += '⚔️ '
+        string += '⚙️ '
         for sira, a in enumerate(i):
             string += "`" + str(a)
             if sira == i.index(i[-1]):
