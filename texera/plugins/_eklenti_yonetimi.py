@@ -17,7 +17,7 @@ async def eklenti_list(client:Client, message:Message):
     """
     
 
-    mesaj = "**✨ Yüklü Pluginler:**\n"
+    mesaj = "**✨ Yüklü Pluginler:**\n\n\n"
     mesaj += eklentilerim()
 
     try:
