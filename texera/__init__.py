@@ -100,8 +100,8 @@ def baslangic() -> None:
 
     try:
         texera.join_chat(TexeraSohbet)
-    except:
-        pass
+    except Exception as E:
+      print(E)
     try:
         texera.join_chat(TexeraUserBot)
     except:
