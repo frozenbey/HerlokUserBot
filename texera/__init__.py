@@ -1,8 +1,10 @@
-from pyrogram import Client, __version__
+import time
+import logging
+from math import ceil
 import os, sys, platform
 from dotenv import load_dotenv
-from math import ceil
-import time
+from pyrogram import Client, __version__
+
 
 print("TexeraUserBot Başlatılıyor...")
 
@@ -46,6 +48,13 @@ if not os.path.isdir(INDIRME_ALANI): os.makedirs(INDIRME_ALANI)
 if STRING_SESSION.startswith('-') or len(STRING_SESSION) < 351:
     hata("\n\tMuhtemelen String Session Hatalı..!\n")
     quit(1)
+
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+LOGGER = logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 
 try:
