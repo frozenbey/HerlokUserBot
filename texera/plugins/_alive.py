@@ -56,8 +56,10 @@ async def komut(client:Client, message:Message):
     pluginsayi = len(tum_eklentiler)
     
     await message.delete()
-    await app.send_photo(message.chat.id,FOTO,caption=ALIVE_MESSAGE.format(BOT_VER,uptime,pluginsayi))
-    
+    try:
+        await client.send_photo(message.chat.id,FOTO,caption=ALIVE_MESSAGE.format(BOT_VER,uptime,pluginsayi))
+    except:
+        await client.send_message(message.chat.id,ALIVE_MESSAGE.format(BOT_VER,uptime,pluginsayi))
     
     
     
