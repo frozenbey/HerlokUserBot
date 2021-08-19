@@ -6,10 +6,11 @@ from texera import TEMP_AYAR, idm
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
+YANITLANAN = []
+
 @Client.on_message(filters.command(['afk'], ['!','.','/']) & filters.me)
 async def afk(client:Client, message:Message):
 
-    #------------------------------------------------------------- Başlang >
     girilen_yazi = message.text
     sebep=girilen_yazi[+5:]
 
@@ -30,11 +31,15 @@ async def on_tag(client:Client, message:Message):
     me = idm
     
     if mentioned or rep_m and rep_m.from_user and rep_m.from_user.id == me:
-        if TEMP_AYAR["AFK"] != "0":
-            if TEMP_AYAR["AFK"][+1:] == '':
-                await message.reply(msg)
-            else:
-                await message.reply(msg + f"\n`Sebep:` {TEMP_AYAR['AFK'][+1:]}")
+        if message.from_user.id in YANITLANAN:
+            pass
+        else:
+            YANITLANAN.append(message.from_user.id)
+            if TEMP_AYAR["AFK"] != "0":
+                if TEMP_AYAR["AFK"][+1:] == '':
+                    await message.reply(msg)
+                else:
+                    await message.reply(msg + f"\n`Sebep:` {TEMP_AYAR['AFK'][+1:]}")
 
 @Client.on_message(filters.incoming & ~filters.bot & filters.private)
 async def on_pm(client:Client, message:Message):
@@ -47,6 +52,9 @@ async def on_pm(client:Client, message:Message):
 
 @Client.on_message(filters.command(['unafk'], ['!','.','/']) & filters.me)
 async def unafk(client:Client, message:Message):
+    global YANITLANAN
+    YANITLANAN = []
+    
     if TEMP_AYAR["AFK"] != "0":
         await message.delete()
         await client.send_message(message.chat.id, "**Artık AFK değilim!**")
