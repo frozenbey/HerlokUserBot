@@ -18,7 +18,7 @@ async def afk(client:Client, message:Message):
 
     msg = "**Artık AFK'yım!**"
     if sebep != "":
-        await message.edit(msg + f"\n`Sebep:` {sebep}`")
+        await message.edit(msg + f"\n`Sebep:` {sebep}")
     else:
         await message.edit(msg)
 
