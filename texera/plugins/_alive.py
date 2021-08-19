@@ -1,4 +1,6 @@
+import os
 import time
+from texera import BOT_VER
 from random import choice
 from texera import StartTime
 from texera.cmdhelp import CmdHelp
@@ -28,14 +30,35 @@ def get_readable_time(seconds: int) -> str:
     ping_time += " ".join(time_list)
 
     return ping_time    
+# ----------------------------------------------------------------------------------
     
     
-ALIVE_MESSAGES = ["Emirlerine hazırım sahibim. 👑","__Her zamanki gibi çalışıyorum.__ ⚡️","**Texera UserBot** 🔨"]
+FOTO = "https://telegra.ph/file/00efe339a87c53f1fe963.jpg"    
+ALIVE_MESSAGE = """
+⚙️ **TEXERA UserBot** __Sahibi İçin Çalışıyor. __⚙️
+
+
+✨**Bot Version:**  `{}`
+✨**Çalışma Süresi:**  `{}`
+✨**Plugin Sayısı:**  `{}`
+"""
+
+
 @Client.on_message(filters.command(['alive'], ['!','.','/']) & filters.me)
 async def komut(client:Client, message:Message):
     uptime = get_readable_time((time.time() - StartTime))
-
-    await message.edit(str(uptime))
+    
+    tum_eklentiler = []
+    for dosya in os.listdir("./texera/plugins/"):
+        if not dosya.endswith(".py") or dosya.startswith("_"):
+            continue
+        tum_eklentiler.append(dosya.replace('.py',''))
+    pluginsayi = len(tum_eklentiler)
+    
+    await message.delete()
+    await app.send_photo(message.chat.id,FOTO,caption=ALIVE_MESSAGE.format(BOT_VER,uptime,pluginsayi))
+    
+    
     
     
 CmdHelp("alive").add_command("alive", None, "Botun çalışıp çalışmadığını kontrol eder.").add()
