@@ -55,7 +55,7 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 LOGGER = logging.getLogger("pyrogram").setLevel(logging.WARNING)
-
+StartTime = time.time()
 
 try:
     texera        = Client(
