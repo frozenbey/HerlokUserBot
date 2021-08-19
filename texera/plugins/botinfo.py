@@ -14,6 +14,6 @@ async def boti(client:Client, message:Message):
             continue
         tum_eklentiler.append(dosya.replace('.py',''))
     lama = len(tum_eklentiler)
-    acklm = "Python versiyonu:{}\nPyrogram versiyonu:{}\nBot versiyonu:{}\nEklenti sayınız:{}".format(SURUM,__version__,BOT_VER,lama)
+    acklm = "`Python versiyonu`:  **{}**\n`Pyrogram versiyonu`:  **{}**\n`Bot versiyonu`:  **{}**\n`Eklenti sayınız`:  **{}**".format(SURUM,__version__,BOT_VER,lama)
     await message.edit(acklm)
 CmdHelp("botinfo").add_command("boti", None, "Botunuz hakkında bilgi verir.").add()
