@@ -8,6 +8,8 @@ from pyrogram.types import Message
 
 
 YANITLANAN = []
+COUNT_PRIV = 0
+COUNT_GRUP = 0
 
 @Client.on_message(filters.command(['afk'], ['!','.','/']) & filters.me)
 async def afk(client:Client, message:Message):
@@ -26,6 +28,7 @@ async def afk(client:Client, message:Message):
 @Client.on_message(filters.incoming & ~filters.bot & ~filters.private)
 async def on_tag(client:Client, message:Message):
     global YANITLANAN
+    global COUNT_GRUP
     
     msg = "Şu an AFK'yım!"
     mentioned = message.mentioned
@@ -34,6 +37,7 @@ async def on_tag(client:Client, message:Message):
     me = idm
     
     if mentioned or rep_m and rep_m.from_user and rep_m.from_user.id == me:
+        COUNT_GRUP += 1
         if message.from_user.id in YANITLANAN:
             pass
         else:
@@ -46,8 +50,11 @@ async def on_tag(client:Client, message:Message):
 
 @Client.on_message(filters.incoming & ~filters.bot & filters.private)
 async def on_pm(client:Client, message:Message):
+    global COUNT_PRIV
+    
     msg = "**Şu an AFK'yım!**"
     if TEMP_AYAR["AFK"] != "0":
+        COUNT_PRIV += 1
         if TEMP_AYAR["AFK"][+1:] == '':
             await message.reply(msg)
         else:
@@ -56,17 +63,20 @@ async def on_pm(client:Client, message:Message):
 @Client.on_message(filters.command(['unafk'], ['!','.','/']) & filters.me)
 async def unafk(client:Client, message:Message):
     global YANITLANAN
+    global COUNT_GRUP
+    global COUNT_PRIV
+    
     YANITLANAN = []
     
     if TEMP_AYAR["AFK"] != "0":
         await message.delete()
-        await client.send_message(message.chat.id, "**Artık AFK değilim!**")
+        await client.send_message(message.chat.id, f"**Artık AFK değilim!**\n\n**Afk iken:**\n__{COUNT_PRIV} Özel Mesaj\n{COUNT_GRUP} Grup Etiketi Aldınız.__")
+        COUNT_GRUP = 0
+        COUNT_PRIV = 0
         TEMP_AYAR["AFK"] = "0"
     else:
         await message.delete()
         
-@Client.on_message(filters.command(['yanıtlanan'], ['!','.','/']) & filters.me)
-async def f(c,m):
-    await m.edit(YANITLANAN)
+
     
 CmdHelp("afk").add_command("afk", "<İsteğe bağlı sebep>", "AFK olduğunuzu belirtir.", "afk uyuyor").add_command("unafk", None, "AFK modunu kapatır.").add()
