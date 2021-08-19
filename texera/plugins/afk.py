@@ -8,6 +8,7 @@ from pyrogram.types import Message
 
 
 YANITLANAN = []
+PRIV_YANITLANAN = []
 COUNT_PRIV = 0
 COUNT_GRUP = 0
 
@@ -50,16 +51,22 @@ async def on_tag(client:Client, message:Message):
 
 @Client.on_message(filters.incoming & ~filters.bot & filters.private)
 async def on_pm(client:Client, message:Message):
+    global PRIV_YANITLANAN
     global COUNT_PRIV
     
     msg = "**Şu an AFK'yım!**"
     if TEMP_AYAR["AFK"] != "0":
         COUNT_PRIV += 1
-        if TEMP_AYAR["AFK"][+1:] == '':
-            await message.reply(msg)
+        if message.from_user.id in PRIV_YANITLANAN:
+                pass
         else:
-            await message.reply(msg + f"\n`Sebep:` {TEMP_AYAR['AFK'][+1:]}`")
+            PRIV_YANITLANAN.append(message.from_user.id)
+            if TEMP_AYAR["AFK"][+1:] == '':
+                await message.reply(msg)
+            else:
+                await message.reply(msg + f"\n`Sebep:` {TEMP_AYAR['AFK'][+1:]}`")
 
+                
 @Client.on_message(filters.command(['unafk'], ['!','.','/']) & filters.me)
 async def unafk(client:Client, message:Message):
     global YANITLANAN
