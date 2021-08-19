@@ -6,7 +6,7 @@ from texera import TEMP_AYAR, idm
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-global YANITLANAN
+
 YANITLANAN = []
 
 @Client.on_message(filters.command(['afk'], ['!','.','/']) & filters.me)
@@ -64,5 +64,9 @@ async def unafk(client:Client, message:Message):
         TEMP_AYAR["AFK"] = "0"
     else:
         await message.delete()
-
+        
+@Client.on_message(filters.command(['yanıtlanan'], ['!','.','/']) & filters.me)
+async def f(c,m):
+    await m.edit(YANITLANAN)
+    
 CmdHelp("afk").add_command("afk", "<İsteğe bağlı sebep>", "AFK olduğunuzu belirtir.", "afk uyuyor").add_command("unafk", None, "AFK modunu kapatır.").add()
