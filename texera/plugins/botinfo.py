@@ -1,4 +1,4 @@
-from texera import SURUM
+from texera import SURUM,TEMP_AYAR
 
 from pyrogram import Client, filters,__version__
 from pyrogram.types import Message
