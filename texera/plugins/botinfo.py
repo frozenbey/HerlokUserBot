@@ -28,5 +28,5 @@ async def boti(client:Client, message:Message):
     lama = len(tum_eklentiler)
     acklm = "`Python versiyonu`:  **{}**\n`Pyrogram versiyonu`:  **{}**\n`Bot versiyonu`:  **{}**\n`Eklenti sayınız`:  **{}**\n\n".format(SURUM,__version__,BOT_VER,lama)
     acklm += MESAJ
-    await message.edit(acklm)
+    await message.edit(acklm, disable_web_page_preview=True)
 CmdHelp("botinfo").add_command("boti", None, "Botunuz hakkında bilgi verir.").add()
