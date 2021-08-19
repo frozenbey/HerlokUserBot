@@ -6,6 +6,7 @@ from texera import TEMP_AYAR, idm
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
+global YANITLANAN
 YANITLANAN = []
 
 @Client.on_message(filters.command(['afk'], ['!','.','/']) & filters.me)
@@ -24,6 +25,8 @@ async def afk(client:Client, message:Message):
 
 @Client.on_message(filters.incoming & ~filters.bot & ~filters.private)
 async def on_tag(client:Client, message:Message):
+    global YANITLANAN
+    
     msg = "Şu an AFK'yım!"
     mentioned = message.mentioned
     rep_m = message.reply_to_message
