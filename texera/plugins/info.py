@@ -22,6 +22,6 @@ async def hakkbilgi(client:Client, message:Message):
  ┣ @TexeraPlugin
  ┗━━━━━━━━━━━━━━━━━━━━━
  """
-    await message.edit(MESAJ)
+    await message.edit(MESAJ,disable_web_page_preview=True)
 
 CmdHelp("info").add_command("info", None, "Botun sahipleri, geliştiriciler ve USERBOT kanalları hakkında bilgi verir.").add()
