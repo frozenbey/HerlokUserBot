@@ -20,10 +20,12 @@ async def destek(client:Client, message:Message):
 
         await message.edit(mesaj)
         return
+    try:
+        await message.edit(CMD_HELP[girilen_yazi[1]])
+    except:
+        await message.edit("`Böyle bir plugin yok.`")
 
-    await message.edit(CMD_HELP[girilen_yazi[1]])
-
-
+        
 @Client.on_message(filters.command(['log'], ['!','.','/']) & filters.me)
 async def logsalla(client:Client, message:Message):
     
