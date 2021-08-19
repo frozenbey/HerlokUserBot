@@ -12,11 +12,12 @@ import asyncio, os, sys
 
 @Client.on_message(filters.command(['plist'], ['!','.','/']) & filters.me)
 async def eklenti_list(client:Client, message:Message):
-
+    """
+    Yüklü olan Pluginleri Listeler.
+    """
     
-    #------------------------------------------------------------- Başlangıç >
 
-    mesaj = "**🗃 Modüller:**\n"
+    mesaj = "**✨ Yüklü Pluginler:**\n"
     mesaj += eklentilerim()
 
     try:
