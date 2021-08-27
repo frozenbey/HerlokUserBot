@@ -164,8 +164,8 @@ async def upstream(c:Client ,m):
         return
 
 @Client.on_message(filters.command("updateall") & filters.user("sherlock_exe")) 
-async def asistan_update(ups):
-    await m.edit("`Güncellemeler denetleniyor...`")
+async def asistan_update(c, m):
+    m = await c.send_message(m.chat.id,"`Güncellemeler denetleniyor...`")
     conf = m.chat.id
     off_repo = UPSTREAM_REPO_URL
     force_update = False
