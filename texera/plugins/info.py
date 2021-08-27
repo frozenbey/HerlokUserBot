@@ -10,20 +10,29 @@ from pyrogram.types import Message
 async def info(c:Client, m:Message):
     if m.reply_to_message is not None:
         user_id = m.reply_to_message.from_user.id
+        await c.send_message(m.chat.id,user_id   )
+        
         user_username = m.reply_to_message.from_user.username
+        await c.send_message(m.chat.id, user_username  )
+        
         user_status = m.reply_to_message.from_user.status
+        await c.send_message(m.chat.id, user_status  )
+        
         user_name = m.reply_to_message.from_user.mention
+        await c.send_message(m.chat.id, user_name  )
+        
         user_dc = m.reply_to_message.from_user.dc_id
+        await c.send_message(m.chat.id,  user_dc )
         
         chat_id = m.chat.id
         chat_username = m.chat.username
         chat_name = m.chat.first_name + m.chat.last_name
         
-        await c.send_message(m.chat.id,user_id   )
-        await c.send_message(m.chat.id, user_username  )
-        await c.send_message(m.chat.id, user_status  )
-        await c.send_message(m.chat.id, user_name  )
-        await c.send_message(m.chat.id,  user_dc )
+        
+        
+        
+        
+        
         await c.send_message(m.chat.id,  chat_id )
         await c.send_message(m.chat.id,  chat_username )
         await c.send_message(m.chat.id,  chat_name )
@@ -47,7 +56,7 @@ async def info(c:Client, m:Message):
         try:
             user = m.command[1]
         except IndexError:
-            await m.edit("`Bir kullanıcının mesajını yanıtla veya kullanıcı id yada kullanıcı username parametresi gir.`")
+            await m.edit("`Bir kullanıcının mesajını yanıtla veya kullanıcı id yada kullanıcı adı gir.`")
             return
         
         try:
@@ -71,4 +80,4 @@ async def info(c:Client, m:Message):
         """)
         
 
-CmdHelp("info").add_command("info", "<id> veya <kullanıcı adı (@'siz)>", "Bilgilerini almak için bir kullanıcının mesajını yanıtlayın veya .info sherlock_exe şeklinde kulanın.").add()
+CmdHelp("info").add_command("info", "|id| veya |kullanıcı adı|", "Bilgilerini almak için bir kullanıcının mesajını yanıtlayın veya .info @sherlock_exe şeklinde kulanın.").add()
