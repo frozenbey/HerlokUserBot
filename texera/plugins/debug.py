@@ -10,7 +10,7 @@ from texera.cmdhelp import CmdHelp
 @Client.on_message(filters.command(["eval", "py"], ['!','.','/']) & filters.me)
 async def evpy(client, message):
     
-    ilkMesaj = await message.reply_text("`İşleniyor...`")
+    ilkMesaj = await message.edit("`İşleniyor...`")
 
     if message.reply_to_message:
         kod = message.reply_to_message.text
@@ -120,6 +120,6 @@ async def execution(client, message):
 async def public_ip(client, message):
     
     ip = requests.get('https://api.ipify.org').text
-    await message.reply_text(f'<b>Botunuzun IP Adresi:</b>\n<code>{ip}</code>', parse_mode='html')
+    await message.edit(f'<b>Botunuzun IP Adresi:</b>\n<code>{ip}</code>', parse_mode='html')
 
 CmdHelp("debug").add_info("Geliştiriciler için yapılmıştır.").add_command("py", "<kod>", "Python kodu çalıştırır.").add_command("sh", "<komut>", "Komut çalıştırır.").add_command("ip", None, "Botun ip adresini verir.").add()
