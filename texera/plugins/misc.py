@@ -12,9 +12,9 @@ from pyrogram.types import Message
 async def shutdown(client:Client, message:Message):
 
 
-    await message.edit("Hoşça Kal!")
+    await message.edit("**Hoşça Kal!**")
     await asyncio.sleep(1.5)
-    await message.edit("Bot kapatıldı.")
+    await message.edit("**Bot kapatıldı.**")
     try:
         await texera.disconnect()
         await texera.stop()
@@ -25,7 +25,7 @@ async def shutdown(client:Client, message:Message):
 @Client.on_message(filters.command(['restart'], ['!','.','/']) & filters.me)
 async def restart(client:Client, message:Message):
 
-    await message.edit("Yeniden Başlatılıyor...")
+    await message.edit("**Yeniden Başlatılıyor...**")
     try:
         await texera.stop()
     except:
