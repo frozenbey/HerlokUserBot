@@ -15,7 +15,7 @@ async def jsn_ver(client:Client, message:Message):
             text = str(message.reply_to_message)
             with open("json.txt", "w", encoding="utf-8") as dosya:
                 dosya.write(text)
-                await client.send_document(message.chat.id, "json.txt")
+            await client.send_document(message.chat.id, "json.txt")
             os.remove("json.txt")
             
     else:
