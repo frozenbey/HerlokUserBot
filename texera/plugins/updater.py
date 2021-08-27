@@ -40,7 +40,10 @@ async def update_requirements():
 async def upstream(c:Client ,m):
     ".update komutu ile botunun güncel olup olmadığını denetleyebilirsin."
     await m.edit("`Güncellemeler denetleniyor...`")
-    conf = m.chat.id
+    try:
+        conf = m.text.split()[1]
+    except:
+        conf = False
     off_repo = UPSTREAM_REPO_URL
     force_update = False
 
