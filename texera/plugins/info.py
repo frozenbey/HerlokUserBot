@@ -19,27 +19,20 @@ async def info(c:Client, m:Message):
         chat_username = m.chat.username
         chat_name = str(m.chat.first_name) +" "+ str(m.chat.last_name)
         
-        
-        
-        
-        
-        
-        await c.send_message(m.chat.id,  chat_id )
-        await c.send_message(m.chat.id,  chat_username )
-        await c.send_message(m.chat.id,  chat_name )
+  
         
         
         await m.edit(f"""
                 **USER**
-        **İsim:**          {user_name}
-        **Id:**            {user_id}
+        **İsim:** {user_name}
+        **Id:** {user_id}
         **Kullanıcı Adı:** @{user_username}
-        **Son Görülme:**   {user_status}
-        **DC:**            {user_dc}
+        **Son Görülme:** {user_status}
+        **DC:** {user_dc}
         
                 **CHAT**
-        **İsim:**          {chat_name}` 
-        **Id:**            {chat_id}
+        **İsim:** {chat_name}
+        **Id:** {chat_id}
         **Kullanıcı Adı:** @{chat_username}
         """)
         
