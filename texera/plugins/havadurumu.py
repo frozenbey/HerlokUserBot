@@ -24,7 +24,7 @@ async def havadurumu(client:Client, message:Message):
         acıklama =  veri_json["weather"][0]["description"]
         country = veri_json["sys"]["country"]
         wind_speed = veri_json["wind"]["speed"]
-    csıcaklık = str(float(tempature-273.15))
+    csıcaklık = str(float(tempature-273.15))[0:4]
     chis = str(float(hissedilen - 273.15))
     await message.edit("🔆{} şehrinin:\n🌡Sıcaklığı: {}\n🌇Hissedilen sıcaklığı: {}\n🌳Gökyüzünün durumu: {}\n🗺Rüzgar hızı: {}\nŞehrin bulunduğu ülke: {}".format(sehir, csıcaklık, chis, acıklama, wind_speed, country))
     await asyncio.sleep(1.25)
