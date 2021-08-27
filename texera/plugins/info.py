@@ -10,19 +10,10 @@ from pyrogram.types import Message
 async def info(c:Client, m:Message):
     if m.reply_to_message is not None:
         user_id = m.reply_to_message.from_user.id
-        await c.send_message(m.chat.id,user_id   )
-        
         user_username = m.reply_to_message.from_user.username
-        await c.send_message(m.chat.id, user_username  )
-        
-        user_status = m.reply_to_message.from_user.status
-        await c.send_message(m.chat.id, user_status  )
-        
-        user_name = m.reply_to_message.from_user.mention
-        await c.send_message(m.chat.id, user_name  )
-        
+        user_status = m.reply_to_message.from_user.status 
+        user_name = m.reply_to_message.from_user.mention 
         user_dc = m.reply_to_message.from_user.dc_id
-        await c.send_message(m.chat.id,  user_dc )
         
         chat_id = m.chat.id
         chat_username = m.chat.username
