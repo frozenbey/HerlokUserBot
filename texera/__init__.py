@@ -43,6 +43,8 @@ HEROKU_APPNAME  = os.environ.get("HEROKU_APPNAME", str)
 HEROKU_APIKEY   = os.environ.get("HEROKU_APIKEY", str)
 HEROKU          = os.environ.get("HEROKU", str)
 
+UPSTREAM_REPO_URL = "https://github.com/sherlock-exe/TexeraUserBot.git"
+
 if not os.path.isdir(INDIRME_ALANI): os.makedirs(INDIRME_ALANI)
 
 if STRING_SESSION.startswith('-') or len(STRING_SESSION) < 351:
