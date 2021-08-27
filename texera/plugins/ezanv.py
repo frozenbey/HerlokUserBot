@@ -13,7 +13,7 @@ async def ezan(client:Client, message:Message):
     try:
         il = girilen_yazi = message.command[1]
     except IndexError:
-        await m.edit("`Ezan vaktlerini göremek istediğiniz ili girmeyi unuttunuz !`")
+        await message.edit("`Ezan vaktlerini göremek istediğiniz ili girmeyi unuttunuz !`")
     
     if len(girilen_yazi) == 1:
         await message.edit("__Arama yapabilmek için `il` girmelisiniz..__")
