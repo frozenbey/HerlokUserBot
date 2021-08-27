@@ -21,16 +21,16 @@ async def info(c:Client, m:Message):
         
         await m.edit(f"""
                 **USER**
-        **İsim:**          `{user_name}` 
-        **Id:**            `{user_id}`
-        **Kullanıcı Adı:** `{user_username}`
-        **Son Görülme:**   `{user_status}`
-        **DC:**            `{user_dc}`
+        **İsim:**          {user_name}
+        **Id:**            {user_id}
+        **Kullanıcı Adı:** {user_username}
+        **Son Görülme:**   {user_status}
+        **DC:**            {user_dc}
         
                 **CHAT**
-        **İsim:**          `{chat_name}`  
-        **Id:**            `{chat_id}`
-        **Kullanıcı Adı:** `{chat_username}`
+        **İsim:**          {chat_name}` 
+        **Id:**            {chat_id}
+        **Kullanıcı Adı:** @{chat_username}
         """)
         
     else:
@@ -53,11 +53,11 @@ async def info(c:Client, m:Message):
         
         await m.edit(f"""
                 **USER**
-        **İsim:**          `{user_name}` 
-        **Id:**            `{user_id}`
-        **Kullanıcı Adı:** `{user_username}`
-        **Son Görülme:**   `{user_status}`
-        **DC:**            `{user_dc}`
+        **İsim:**          {user_name}
+        **Id:**            {user_id}
+        **Kullanıcı Adı:** {user_username}
+        **Son Görülme:**   {user_status}
+        **DC:**            {user_dc}
         """)
         
 
