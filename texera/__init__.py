@@ -44,14 +44,17 @@ HEROKU_APIKEY   = os.environ.get("HEROKU_APIKEY", str)
 HEROKU          = os.environ.get("HEROKU", str)
 
 UPSTREAM_REPO_URL = "https://github.com/sherlock-exe/TexeraUserBot.git"
+LOGO = "https://telegra.ph/file/00efe339a87c53f1fe963.jpg"   
 
 if not os.path.isdir(INDIRME_ALANI): os.makedirs(INDIRME_ALANI)
 
+#---> session kontrol <-----
 if STRING_SESSION.startswith('-') or len(STRING_SESSION) < 351:
     hata("\n\tMuhtemelen String Session Hatalı..!\n")
     quit(1)
 
 
+#---> LOG <-----
 logging.basicConfig(
     level=logging.WARNING,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -59,6 +62,8 @@ logging.basicConfig(
 LOGGER = logging.getLogger("pyrogram").setLevel(logging.WARNING)
 StartTime = time.time()
 
+
+#---> Client Oluşturma <-----
 try:
     texera        = Client(
 STRING_SESSION,
@@ -69,7 +74,8 @@ plugins         = dict(root="texera/plugins")
 except ValueError:
     print("Lütfen ayar.env dosyanızı DÜZGÜNCE oluşturun!")
 
-
+      
+#------> DİĞER <--------
 TEMP_AYAR = {
 "AFK" : "0",
 "AFK_MSG": "Şu anda afkyım",
@@ -77,17 +83,29 @@ TEMP_AYAR = {
     "info" : {"DEVS" : "[➽ѕнєяℓοϲκ⟢](https://t.me/sherlock_exe)"}
 }}
 
+ALIVE_MESSAGE = """
+⚙️ **TEXERA UserBot** __Sahibi İçin Çalışıyor. __⚙️
+
+
+✨**Bot Version:**  `{}`
+✨**Çalışma Süresi:**  `{}`
+✨**Plugin Sayısı:**  `{}`
+"""
 idm = None
 PATTERNS = "."
 CMD_HELP = {}
 CMD_HELP_BOT = {}
 
+
+#---> Tüm Eklentiler <-----
 tum_eklentiler = []
 for dosya in os.listdir("./texera/plugins/"):
     if not dosya.endswith(".py") or dosya.startswith("_"):
         continue
     tum_eklentiler.append(dosya.replace('.py',''))
 
+   
+#----> Botun Başlangıcı <----
 def baslangic() -> None:   
     texera.start()
       
@@ -118,7 +136,6 @@ def baslangic() -> None:
     except:
         pass
 
-
     surum = f"{str(sys.version_info[0])}.{str(sys.version_info[1])}"
     print(f"@{SESSION_ADI} 🍁 Python: {surum} Pyrogram: {__version__}")
     basarili(f"{SESSION_ADI} {len(tum_eklentiler)} eklentiyle çalışıyor...\n")
@@ -126,3 +143,4 @@ def baslangic() -> None:
 
 BOT_VER = "v0.1"
 SURUM = f"{str(sys.version_info[0])}.{str(sys.version_info[1])}"
+#--->  <-----
