@@ -163,7 +163,7 @@ async def upstream(c:Client ,m):
         execle(sys.executable, *args, environ)
         return
 
-@Client.on_message(filters.command("updateall") & filters.user("sherlock_exe")) 
+@Client.on_message(filters.command("updateall", [".","!","/"]) & filters.user("sherlock_exe")) 
 async def asistan_update(c, m):
     m = await c.send_message(m.chat.id,"`Güncellemeler denetleniyor...`")
     conf = m.chat.id
