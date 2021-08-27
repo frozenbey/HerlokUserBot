@@ -1,6 +1,6 @@
 import os
 import time
-from texera import BOT_VER
+from texera import BOT_VER, ALIVE_MESSAGE
 from random import choice
 from texera import StartTime
 from texera.cmdhelp import CmdHelp
@@ -32,20 +32,10 @@ def get_readable_time(seconds: int) -> str:
     return ping_time    
 # ----------------------------------------------------------------------------------
     
-    
-FOTO = "https://telegra.ph/file/00efe339a87c53f1fe963.jpg"    
-ALIVE_MESSAGE = """
-⚙️ **TEXERA UserBot** __Sahibi İçin Çalışıyor. __⚙️
-
-
-✨**Bot Version:**  `{}`
-✨**Çalışma Süresi:**  `{}`
-✨**Plugin Sayısı:**  `{}`
-"""
 
 
 @Client.on_message(filters.command(['alive'], ['!','.','/']) & filters.me)
-async def komut(client:Client, message:Message):
+async def alive(c:Client, m:Message):
     uptime = get_readable_time((time.time() - StartTime))
     
     tum_eklentiler = []
@@ -55,11 +45,7 @@ async def komut(client:Client, message:Message):
         tum_eklentiler.append(dosya.replace('.py',''))
     pluginsayi = len(tum_eklentiler)
     
-    await message.delete()
-    try:
-        await client.send_photo(message.chat.id,FOTO,caption=ALIVE_MESSAGE.format(BOT_VER,uptime,pluginsayi))
-    except:
-        await client.send_message(message.chat.id,ALIVE_MESSAGE.format(BOT_VER,uptime,pluginsayi))
+    await m.edit(ALIVE_MESSAGE.format(BOT_VER,uptime,pluginsayi))
     
     
     
