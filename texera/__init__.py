@@ -91,6 +91,7 @@ for dosya in os.listdir("./texera/plugins/"):
 def baslangic() -> None:   
     texera.start()
       
+    global idm  
     me = texera.get_me()
     idm = me.id  
       
