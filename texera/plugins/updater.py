@@ -65,13 +65,13 @@ async def upstream(c:Client ,m):
         origin = repo.create_remote('upstream', off_repo)
         origin.fetch()
         force_update = True
-        repo.create_head('master', origin.refs.seden)
+        repo.create_head('main', origin.refs.seden)
         repo.heads.seden.set_tracking_branch(origin.refs.sql)
         repo.heads.seden.checkout(True)
 
     ac_br = repo.active_branch.name
-    if ac_br != 'master':
-        await m.edit("**[UPDATER]:**` Galiba Epic botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen Epic botunu resmi repodan kullan.`")
+    if ac_br != 'main':
+        await m.edit("**[UPDATER]:**` Galiba Texera botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen Texera botunu resmi repodan kullan.`")
         repo.__del__()
         return
 
@@ -143,7 +143,7 @@ async def upstream(c:Client ,m):
         else:
             remote = repo.create_remote("heroku", heroku_git_url)
         try:
-            remote.push(refspec="HEAD:refs/heads/master", force=True)
+            remote.push(refspec="HEAD:refs/heads/main", force=True)
         except GitCommandError as error:
             await m.edit(f'{txt}\n`Karşılaşılan hatalar burada:\n{error}`')
             repo.__del__()
@@ -159,7 +159,7 @@ async def upstream(c:Client ,m):
         await update_requirements()
         await m.edit("✨ Texera UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
         # Bot için Heroku üzerinde yeni bir instance oluşturalım.
-        args = [sys.executable, "main.py"]
+        args = [sys.executable, "tex.py"]
         execle(sys.executable, *args, environ)
         return
 
@@ -191,13 +191,13 @@ async def asistan_update(ups):
         origin = repo.create_remote('upstream', off_repo)
         origin.fetch()
         force_update = True
-        repo.create_head('master', origin.refs.seden)
+        repo.create_head('main', origin.refs.seden)
         repo.heads.seden.set_tracking_branch(origin.refs.sql)
         repo.heads.seden.checkout(True)
 
     ac_br = repo.active_branch.name
-    if ac_br != 'master':
-        await m.edit("**[UPDATER]:**` Galiba Epic botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen Epic botunu resmi repodan kullan.`")
+    if ac_br != 'main':
+        await m.edit("**[UPDATER]:**` Galiba Texera botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen  botunu resmi repodan kullan.`")
         repo.__del__()
         return
 
@@ -269,7 +269,7 @@ async def asistan_update(ups):
         else:
             remote = repo.create_remote("heroku", heroku_git_url)
         try:
-            remote.push(refspec="HEAD:refs/heads/master", force=True)
+            remote.push(refspec="HEAD:refs/heads/main", force=True)
         except GitCommandError as error:
             await m.edit(f'{txt}\n`Karşılaşılan hatalar burada:\n{error}`')
             repo.__del__()
