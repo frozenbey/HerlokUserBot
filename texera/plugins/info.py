@@ -61,4 +61,4 @@ async def info(c:Client, m:Message):
         """)
         
 
-CmdHelp("info").add_command("info", "info sherlock_exe", "Bilgilerini almak için bir kullanıcının mesajını yanıtlayın veya .info sherlock_exe şeklinde kulanın.").add()
+CmdHelp("info").add_command("info", "<id> veya <kullanıcı adı (@'siz)>", "Bilgilerini almak için bir kullanıcının mesajını yanıtlayın veya .info sherlock_exe şeklinde kulanın.").add()
