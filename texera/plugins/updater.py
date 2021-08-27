@@ -71,7 +71,7 @@ async def upstream(c:Client ,m):
 
     ac_br = repo.active_branch.name
     if ac_br != 'master':
-        await m.edit("**[UPDATER]:**` Galiba Epic botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen Epic botunu resmi repodan kullan.`")
+        await m.edit("**[UPDATER]:**` Galiba Texera botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen Texera botunu resmi repodan kullan.`")
         repo.__del__()
         return
 
@@ -197,7 +197,7 @@ async def asistan_update(ups):
 
     ac_br = repo.active_branch.name
     if ac_br != 'master':
-        await m.edit("**[UPDATER]:**` Galiba Epic botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen Epic botunu resmi repodan kullan.`")
+        await m.edit("**[UPDATER]:**` Galiba Texera botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen  botunu resmi repodan kullan.`")
         repo.__del__()
         return
 
