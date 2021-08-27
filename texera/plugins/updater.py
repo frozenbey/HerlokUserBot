@@ -128,7 +128,7 @@ async def upstream(c:Client ,m):
                 break
         if heroku_app is None:
             await m.edit(
-                "{}\n`Heroku değişkenleri yanlış veya eksik tanımlanmış.`",.format(txt)
+                "{}\n`Heroku değişkenleri yanlış veya eksik tanımlanmış.`".format(txt)
             )
             repo.__del__()
             return
