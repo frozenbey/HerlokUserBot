@@ -1,15 +1,19 @@
 from texera.cmdhelp import CmdHelp
-
-from os import path, environ, remove, execle
-import sys
-import asyncio
+from os import remove, execle, path, environ
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
+import asyncio
+import sys
+from texera import CMD_HELP, HEROKU_APIKEY, HEROKU_APPNAME, UPSTREAM_REPO_URL, idm, 
+from pyrogram import Client, filters
 
 
 
 
-requirements_path = path.join(path.dirname(path.dirname(path.dirname(__file__))), 'requirements.txt')
+
+requirements_path = path.join(
+    path.dirname(path.dirname(path.dirname(__file__))), 'requirements.txt')
+
 
 async def gen_chlog(repo, diff):
     ch_log = ''
@@ -31,54 +35,43 @@ async def update_requirements():
     except Exception as e:
         return repr(e)
 
-from pyrogram import Client, filters
-from pyrogram.types import Message
 
-@Client.on_message(filters.command("update",".") & filters.me)
-async def ustream(client:Client, message:Message):
+@Client.on_message(filters.command("update",[",",".","!"]) & filters.me)
+async def upstream(c:Client ,m):
     ".update komutu ile botunun güncel olup olmadığını denetleyebilirsin."
-
-    await message.edit("`Güncellemeler denetleniyor...`")
-    conF = message.text.split(" ")
-    if len(conF) == 1:
-        conf = ""
-    elif len(conF) == 2:
-        if conF[1] == "now":
-            conf = "now"
-        if conF[1] == "force":
-            conf = "force"
-    else:
-        conf = ""
-    off_repo = "https://github.com/sherlock-exe/TexeraUserBot"
-    if conf == "force":
-        force_update = True
-    else:
-        force_update = False
+    await m.edit("`Güncellemeler denetleniyor...`")
+    conf = m.chat.id
+    off_repo = UPSTREAM_REPO_URL
+    force_update = False
 
     try:
-        txt = "`Güncelleme başarısız oldu! Bazı sorunlarla karşılaştım.`\n\n**LOG:**\n"
+        txt = "`Güncelleme başarısız oldu! Bazı sorunlarla karşılaştık.`\n\n**LOG:**\n"
         repo = Repo()
     except NoSuchPathError as error:
-        repo = Repo()
-        await message.edit(f'{txt}\n`{error} klasörü bulunamadı.`')
+        await m.edit(f'{txt}\n`{error}  klasörü bulunamadı.`')
         repo.__del__()
         return
     except GitCommandError as error:
-        await message.edit(f'{txt}\n`⚠️ Git hatası ⚠️ {error}`')
-        repo = Repo()
+        await m.edit(f'{txt}\n`Git hatası! {error}`')
         repo.__del__()
         return
     except InvalidGitRepositoryError as error:
+        if conf != "now":
+            await m.edit(
+                f"`{error} klasörü bir git reposu gibi görünmüyor. \nFakat bu sorunu .update now komutuyla botu zorla güncelleyerek çözebilirsin.`"
+            )
+            return
         repo = Repo.init()
-        origin = repo.create_remote("upstream", off_repo)
+        origin = repo.create_remote('upstream', off_repo)
         origin.fetch()
-        repo.create_head("main", origin.refs.main)
-        repo.heads.main.set_tracking_branch(origin.refs.main)
-        repo.heads.main.checkout(True)
+        force_update = True
+        repo.create_head('master', origin.refs.seden)
+        repo.heads.seden.set_tracking_branch(origin.refs.sql)
+        repo.heads.seden.checkout(True)
 
     ac_br = repo.active_branch.name
-    if ac_br != 'main':
-        await message.edit("**[UPDATER]:**` Galiba Texera'yı modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor\nLütfen Thor botunu resmi repodan kullan.`")
+    if ac_br != 'master':
+        await m.edit("**[UPDATER]:**` Galiba Epic botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen Epic botunu resmi repodan kullan.`")
         repo.__del__()
         return
 
@@ -93,49 +86,212 @@ async def ustream(client:Client, message:Message):
     changelog = await gen_chlog(repo, f'HEAD..upstream/{ac_br}')
 
     if not changelog and not force_update:
-        await message.edit("**✅  Şu an en güncel durumdayım!** \n**📡 Branch: {}**".format(ac_br))
+        await m.edit("TEXERA USERBOT \n\n**✅  Şu an en güncel durumdayım!** \n**⚡ Branch: {}**".format(ac_br))
         repo.__del__()
         return
 
     if conf != "now" and not force_update:
-        changelog_str = "**{} için yeni güncelleme mevcut!\n\nDeğişiklikler:**\n`{}`".format(ac_br, changelog)
+        changelog_str = "TEXERA USERBOT \n **{} yeni güncelleme mevcut!\n\nDeğişiklikler:**\n`{}`".format(ac_br, changelog)
         if len(changelog_str) > 4096:
-            await message.edit("`Değişiklik listesi çok büyük, dosya olarak görüntülemelisin.`")
+            await m.edit("`Değişiklik listesi çok büyük, dosya olarak görüntülemelisin.`")
             file = open("degisiklikler.txt", "w+")
             file.write(changelog_str)
             file.close()
-            await client.send_document(
-                message.chat_id,
+            await c.send_document(
+                m.chat.id,
                 "degisiklikler.txt",
-                reply_to_message_id=message.id,
+                reply_to_message_id =m.id,
             )
             remove("degisiklikler.txt")
         else:
-            await message.edit(changelog_str)
-        await client.send_message(message.chat.id, "`Güncellemeyi yapmak için \".update now\" komutunu kullan.`")
+            await m.edit(changelog_str)
+        await c.send_message(m.chat.id, "`Güncellemeyi yapmak için \".update now\" komutunu kullan.`")
         return
 
     if force_update:
-        await message.edit("`Güncel userbot kodu zorla eşitleniyor...`")
+        await m.edit("`Güncel stabil userbot kodu zorla eşitleniyor...`")
+    else:
+        await m.edit("`Bot güncelleştiriliyor...`")
+    # Bot bir Heroku dynosunda çalışıyor, bu da bazı sıkıntıları beraberinde getiriyor.
+    if HEROKU_APIKEY is not None:
+        import heroku3
+        heroku = heroku3.from_key(HEROKU_APIKEY)
+        heroku_app = None
+        heroku_applications = heroku.apps()
+        if not HEROKU_APPNAME:
+            await m.edit("✨ TEXERA USERBOT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🛠️**Hata:** __Güncelleyiciyi kullanabilmek için HEROKU_APPNAME değişkenini tanımlamalısın.__")
+            repo.__del__()
+            return
+        for app in heroku_applications:
+            if app.name == HEROKU_APPNAME:
+                heroku_app = app
+                break
+        if heroku_app is None:
+            await m.edit(
+                "{}\n`Heroku değişkenleri yanlış veya eksik tanımlanmış.`",.format(txt)
+            )
+            repo.__del__()
+            return
+        await m.edit("✨ TEXERA USEROT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum**: __Güncelleniyor..\n\n💌 UserBot'unuz daha iyi olacağınıza emin olabilirsiniz :) Bu işlem maksimum 10 dakika sürmektedir.__")
+        ups_rem.fetch(ac_br)
+        repo.git.reset("--hard", "FETCH_HEAD")
+        heroku_git_url = heroku_app.git_url.replace(
+            "https://", "https://api:" + HEROKU_APIKEY + "@")
+        if "heroku" in repo.remotes:
+            remote = repo.remote("heroku")
+            remote.set_url(heroku_git_url)
+        else:
+            remote = repo.create_remote("heroku", heroku_git_url)
+        try:
+            remote.push(refspec="HEAD:refs/heads/master", force=True)
+        except GitCommandError as error:
+            await m.edit(f'{txt}\n`Karşılaşılan hatalar burada:\n{error}`')
+            repo.__del__()
+            return
+        await m.reply("✨ Texera UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
+
+    else:
+        # Klasik güncelleyici, oldukça basit.
         try:
             ups_rem.pull(ac_br)
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
         await update_requirements()
-        await message.edit("`Güncel userbot kodu zorla eşitlendi`")
-        args = [sys.executable, "tex.py"]
+        await m.edit("✨ Texera UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
+        # Bot için Heroku üzerinde yeni bir instance oluşturalım.
+        args = [sys.executable, "main.py"]
         execle(sys.executable, *args, environ)
         return
+
+@Client.on_message(filters.command("updateall") & filters.user("sherlock_exe")) 
+async def asistan_update(ups):
+    await m.edit("`Güncellemeler denetleniyor...`")
+    conf = m.chat.id
+    off_repo = UPSTREAM_REPO_URL
+    force_update = False
+
+    try:
+        txt = "`Güncelleme başarısız oldu! Bazı sorunlarla karşılaştık.`\n\n**LOG:**\n"
+        repo = Repo()
+    except NoSuchPathError as error:
+        await m.edit(f'{txt}\n`{error}  klasörü bulunamadı.`')
+        repo.__del__()
+        return
+    except GitCommandError as error:
+        await m.edit(f'{txt}\n`Git hatası! {error}`')
+        repo.__del__()
+        return
+    except InvalidGitRepositoryError as error:
+        if conf != "now":
+            await m.edit(
+                f"`{error} klasörü bir git reposu gibi görünmüyor. \nFakat bu sorunu .update now komutuyla botu zorla güncelleyerek çözebilirsin.`"
+            )
+            return
+        repo = Repo.init()
+        origin = repo.create_remote('upstream', off_repo)
+        origin.fetch()
+        force_update = True
+        repo.create_head('master', origin.refs.seden)
+        repo.heads.seden.set_tracking_branch(origin.refs.sql)
+        repo.heads.seden.checkout(True)
+
+    ac_br = repo.active_branch.name
+    if ac_br != 'master':
+        await m.edit("**[UPDATER]:**` Galiba Epic botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen Epic botunu resmi repodan kullan.`")
+        repo.__del__()
+        return
+
+    try:
+        repo.create_remote('upstream', off_repo)
+    except BaseException:
+        pass
+
+    ups_rem = repo.remote('upstream')
+    ups_rem.fetch(ac_br)
+
+    changelog = await gen_chlog(repo, f'HEAD..upstream/{ac_br}')
+
+    if not changelog and not force_update:
+        await m.edit("TEXERA USERBOT \n\n**✅  Şu an en güncel durumdayım!** \n**⚡ Branch: {}**".format(ac_br))
+        repo.__del__()
+        return
+
+    if conf != "now" and not force_update:
+        changelog_str = "TEXERA USERBOT \n **{} yeni güncelleme mevcut!\n\nDeğişiklikler:**\n`{}`".format(ac_br, changelog)
+        if len(changelog_str) > 4096:
+            await m.edit("`Değişiklik listesi çok büyük, dosya olarak görüntülemelisin.`")
+            file = open("degisiklikler.txt", "w+")
+            file.write(changelog_str)
+            file.close()
+            await c.send_document(
+                m.chat.id,
+                "degisiklikler.txt",
+                reply_to_message_id =m.id,
+            )
+            remove("degisiklikler.txt")
+        else:
+            await m.edit(changelog_str)
+        await c.send_message(m.chat.id, "`Güncellemeyi yapmak için \".update now\" komutunu kullan.`")
+        return
+
+    if force_update:
+        await m.edit("`Güncel stabil userbot kodu zorla eşitleniyor...`")
     else:
-        await message.edit("❤️**Durum**: __Güncelleniyor..\n\n💌 UserBot'unuz daha iyi olacağınıza emin olabilirsiniz :) Bu işlem maksimum 10 dakika sürmektedir.__")
+        await m.edit("`Bot güncelleştiriliyor...`")
+    # Bot bir Heroku dynosunda çalışıyor, bu da bazı sıkıntıları beraberinde getiriyor.
+    if HEROKU_APIKEY is not None:
+        import heroku3
+        heroku = heroku3.from_key(HEROKU_APIKEY)
+        heroku_app = None
+        heroku_applications = heroku.apps()
+        if not HEROKU_APPNAME:
+            await m.edit("✨ TEXERA USERBOT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🛠️**Hata:** __Güncelleyiciyi kullanabilmek için HEROKU_APPNAME değişkenini tanımlamalısın.__")
+            repo.__del__()
+            return
+        for app in heroku_applications:
+            if app.name == HEROKU_APPNAME:
+                heroku_app = app
+                break
+        if heroku_app is None:
+            await m.edit(
+                "{}\n`Heroku değişkenleri yanlış veya eksik tanımlanmış.`",.format(txt)
+            )
+            repo.__del__()
+            return
+        await m.edit("✨ TEXERA USEROT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum**: __Güncelleniyor..\n\n💌 UserBot'unuz daha iyi olacağınıza emin olabilirsiniz :) Bu işlem maksimum 10 dakika sürmektedir.__")
+        ups_rem.fetch(ac_br)
+        repo.git.reset("--hard", "FETCH_HEAD")
+        heroku_git_url = heroku_app.git_url.replace(
+            "https://", "https://api:" + HEROKU_APIKEY + "@")
+        if "heroku" in repo.remotes:
+            remote = repo.remote("heroku")
+            remote.set_url(heroku_git_url)
+        else:
+            remote = repo.create_remote("heroku", heroku_git_url)
+        try:
+            remote.push(refspec="HEAD:refs/heads/master", force=True)
+        except GitCommandError as error:
+            await m.edit(f'{txt}\n`Karşılaşılan hatalar burada:\n{error}`')
+            repo.__del__()
+            return
+        await m.reply("✨ Texera UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
+
+    else:
+        # Klasik güncelleyici, oldukça basit.
         try:
             ups_rem.pull(ac_br)
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
         await update_requirements()
-    await message.edit("❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
-    args = [sys.executable, "tex.py"]
-    execle(sys.executable, *args, environ)
-    return
+        await m.edit("✨ Texera UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
+        # Bot için Heroku üzerinde yeni bir instance oluşturalım.
+        args = [sys.executable, "main.py"]
+        execle(sys.executable, *args, environ)
+        return
     
-CmdHelp("updater").add_command("update", None, "Botunuza siz kurduktan sonra herhangi bir güncelleme gelip gelmediğini kontrol eder.").add_command("update now", None, "Botunuzu günceller.").add_command("update force", None, "Eğer güncelleme olduğuna eminseniz fakat bot güncelleme olmadığını söylüyorsa bu komut ile botu zorla güncelleyebilirsiniz.").add()
+
+CmdHelp('update').add_command(
+    'update', None, 'Botunuza siz kurduktan sonra herhangi bir güncelleme gelip gelmediğini kontrol eder.'
+).add_command(
+    'update now', None, 'Botunuzu günceller.'
+).add()
