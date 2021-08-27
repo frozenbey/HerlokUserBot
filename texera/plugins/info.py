@@ -26,7 +26,7 @@ async def info(c:Client, m:Message):
         
         chat_id = m.chat.id
         chat_username = m.chat.username
-        chat_name = m.chat.first_name + m.chat.last_name
+        chat_name = str(m.chat.first_name) +" "+ str(m.chat.last_name)
         
         
         
