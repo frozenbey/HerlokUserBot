@@ -17,7 +17,6 @@ async def info(c:Client, m:Message):
         
         chat_id = m.chat.id
         chat_username = m.chat.username
-        chat_name = str(m.chat.first_name) +" "+ str(m.chat.last_name)
         
   
         
@@ -31,7 +30,6 @@ async def info(c:Client, m:Message):
         **DC:** {user_dc}
         
                 **CHAT**
-        **İsim:** {chat_name}
         **Id:** {chat_id}
         **Kullanıcı Adı:** @{chat_username}
         """)
