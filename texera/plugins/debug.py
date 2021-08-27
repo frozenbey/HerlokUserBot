@@ -59,7 +59,6 @@ async def evpy(client, message):
         await ilkMesaj.delete()
     else:
         await ilkMesaj.edit(yanit)
-    await message.delete()
 
 async def aexec(code, client, message):
     exec(
@@ -72,7 +71,7 @@ async def aexec(code, client, message):
 @Client.on_message(filters.command(["exec", "sh"], ['!','.','/']) & filters.me)
 async def execution(client, message):
     
-    ilkMesaj = await message.reply_text("`İşleniyor...`")
+    ilkMesaj = await message.edit("`İşleniyor...`")
 
     if message.reply_to_message:
         kod = message.reply_to_message.text
@@ -114,8 +113,7 @@ async def execution(client, message):
         await ilkMesaj.delete()
     else:
         await ilkMesaj.edit(yanit)
-    await message.delete()
-
+        
 @Client.on_message(filters.command(["ip"], ['!','.','/']) & filters.me)
 async def public_ip(client, message):
     
