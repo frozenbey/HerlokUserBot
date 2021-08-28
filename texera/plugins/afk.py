@@ -149,4 +149,4 @@ async def auto_afk_unset(_, message: Message):
         
 
     
-CmdHelp("afk").add_command("afk", "<sebep>", "AFK olduğunuzu belirtir.", "afk uyuyor").add_command("unafk", None, "AFK modunu kapatır.").add()
+CmdHelp("afk").add_command("afk", "|sebep|", "AFK olduğunuzu belirtir.", "afk uyuyor").add_command("unafk", None, "AFK modunu kapatır.").add()
