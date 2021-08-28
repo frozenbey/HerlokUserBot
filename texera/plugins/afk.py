@@ -109,7 +109,7 @@ async def afk_set(_, message: Message):
     await message.delete()
 
 
-@UserBot.on_message(filters.command("unafk", ".") & filters.me, group=3)
+@Client.on_message(filters.command("unafk", ".") & filters.me, group=3)
 async def afk_unset(_, message: Message):
     global AFK, AFK_TIME, AFK_REASON, USERS, GROUPS
 
