@@ -6,7 +6,7 @@ from texera import TEMP_AYAR, idm
 import asyncio
 from datetime import datetime
 import humanize
-from pyrogram import filters
+from pyrogram import filters, Client
 from pyrogram.types import Message
 
 def GetChatID(message: Message):
