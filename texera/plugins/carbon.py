@@ -46,7 +46,7 @@ async def update_carbon_lang(_, message: Message):
     await message.delete()
 
 
-@UserBot.on_message(filters.command("carbonlang", "!") & filters.me)
+@Client.on_message(filters.command("carbonlang", "!") & filters.me)
 async def send_carbon_lang(_, message: Message):
     await message.edit_text(get_carbon_lang())
     await sleep(5)
