@@ -17,7 +17,7 @@ def ReplyCheck(message: Message):
 
 
 @Client.on_message(filters.command("spam", ".") & filters.me)
-async def spam(_, message: Message):
+async def spam(c:Client, message: Message):
     #--> Mesajı Sil
     await message.delete()
 
@@ -27,7 +27,7 @@ async def spam(_, message: Message):
     #--> Grup spammer
     if message.chat.type in ["supergroup", "group"]:
         for _ in range(int(times)):
-            await UserBot.send_message(
+            await c.send_message(
                 message.chat.id, to_spam, reply_to_message_id=ReplyCheck(message)
             )
             await asyncio.sleep(0.20)
