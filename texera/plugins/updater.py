@@ -76,7 +76,7 @@ async def upstream(c:Client ,m):
 
     ac_br = repo.active_branch.name
     if ac_br != 'main':
-        await m.edit("**[UPDATER]:**` Galiba Texera botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen Texera botunu resmi repodan kullan.`")
+        await m.edit("**[UPDATER]:**` Galiba Herlock botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen Herlock botunu resmi repodan kullan.`")
         repo.__del__()
         return
 
@@ -91,12 +91,12 @@ async def upstream(c:Client ,m):
     changelog = await gen_chlog(repo, f'HEAD..upstream/{ac_br}')
 
     if not changelog and not force_update:
-        await m.edit("TEXERA USERBOT \n\n**✅  Şu an en güncel durumdayım!** \n**⚡ Branch: {}**".format(ac_br))
+        await m.edit("HERLOCK USERBOT \n\n**✅  Şu an en güncel durumdayım!** \n**⚡ Branch: {}**".format(ac_br))
         repo.__del__()
         return
 
     if conf != "now" and not force_update:
-        changelog_str = "TEXERA USERBOT \n **{} yeni güncelleme mevcut!\n\nDeğişiklikler:**\n`{}`".format(ac_br, changelog)
+        changelog_str = "HERLOCK USERBOT \n **{} yeni güncelleme mevcut!\n\nDeğişiklikler:**\n`{}`".format(ac_br, changelog)
         if len(changelog_str) > 4096:
             await m.edit("`Değişiklik listesi çok büyük, dosya olarak görüntülemelisin.`")
             file = open("degisiklikler.txt", "w+")
@@ -124,7 +124,7 @@ async def upstream(c:Client ,m):
         heroku_app = None
         heroku_applications = heroku.apps()
         if not HEROKU_APPNAME:
-            await m.edit("✨ TEXERA USERBOT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🛠️**Hata:** __Güncelleyiciyi kullanabilmek için HEROKU_APPNAME değişkenini tanımlamalısın.__")
+            await m.edit("✨ HERLOCK USERBOT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🛠️**Hata:** __Güncelleyiciyi kullanabilmek için HEROKU_APPNAME değişkenini tanımlamalısın.__")
             repo.__del__()
             return
         for app in heroku_applications:
@@ -137,7 +137,7 @@ async def upstream(c:Client ,m):
             )
             repo.__del__()
             return
-        await m.edit("✨ TEXERA USERBOT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum**: __Güncelleniyor..\n\n💌 UserBot'unuz daha iyi olacağınıza emin olabilirsiniz :) Bu işlem maksimum 10 dakika sürmektedir.__")
+        await m.edit("✨ HERLOCK USERBOT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum**: __Güncelleniyor..\n\n💌 UserBot'unuz daha iyi olacağınıza emin olabilirsiniz :) Bu işlem maksimum 10 dakika sürmektedir.__")
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
         heroku_git_url = heroku_app.git_url.replace(
@@ -153,7 +153,7 @@ async def upstream(c:Client ,m):
             await m.edit(f'{txt}\n`Karşılaşılan hatalar burada:\n{error}`')
             repo.__del__()
             return
-        await m.reply("✨ Texera UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
+        await m.reply("✨ Herlock UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
 
     else:
         # Klasik güncelleyici, oldukça basit.
@@ -162,7 +162,7 @@ async def upstream(c:Client ,m):
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
         await update_requirements()
-        await m.edit("✨ Texera UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
+        await m.edit("✨ Herlock UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
         # Bot için Heroku üzerinde yeni bir instance oluşturalım.
         args = [sys.executable, "tex.py"]
         execle(sys.executable, *args, environ)
@@ -202,7 +202,7 @@ async def asistan_update(c, m):
 
     ac_br = repo.active_branch.name
     if ac_br != 'main':
-        await m.edit("**[UPDATER]:**` Galiba Texera botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen  botunu resmi repodan kullan.`")
+        await m.edit("**[UPDATER]:**` Galiba Herlock botunu modifiye ettin ve kendi branşını kullanıyorsun.\nBu durum güncelleyicinin kafasını karıştırıyor,\nGüncelleme nereden çekilecek?\nLütfen  botunu resmi repodan kullan.`")
         repo.__del__()
         return
 
@@ -217,12 +217,12 @@ async def asistan_update(c, m):
     changelog = await gen_chlog(repo, f'HEAD..upstream/{ac_br}')
 
     if not changelog and not force_update:
-        await m.edit("TEXERA USERBOT \n\n**✅  Şu an en güncel durumdayım!** \n**⚡ Branch: {}**".format(ac_br))
+        await m.edit("HERLOCK USERBOT \n\n**✅  Şu an en güncel durumdayım!** \n**⚡ Branch: {}**".format(ac_br))
         repo.__del__()
         return
 
     if conf != "now" and not force_update:
-        changelog_str = "TEXERA USERBOT \n **{} yeni güncelleme mevcut!\n\nDeğişiklikler:**\n`{}`".format(ac_br, changelog)
+        changelog_str = "HERLOCK USERBOT \n **{} yeni güncelleme mevcut!\n\nDeğişiklikler:**\n`{}`".format(ac_br, changelog)
         if len(changelog_str) > 4096:
             await m.edit("`Değişiklik listesi çok büyük, dosya olarak görüntülemelisin.`")
             file = open("degisiklikler.txt", "w+")
@@ -250,7 +250,7 @@ async def asistan_update(c, m):
         heroku_app = None
         heroku_applications = heroku.apps()
         if not HEROKU_APPNAME:
-            await m.edit("✨ TEXERA USERBOT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🛠️**Hata:** __Güncelleyiciyi kullanabilmek için HEROKU_APPNAME değişkenini tanımlamalısın.__")
+            await m.edit("✨ HERLOCK USERBOT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🛠️**Hata:** __Güncelleyiciyi kullanabilmek için HEROKU_APPNAME değişkenini tanımlamalısın.__")
             repo.__del__()
             return
         for app in heroku_applications:
@@ -263,7 +263,7 @@ async def asistan_update(c, m):
             )
             repo.__del__()
             return
-        await m.edit("✨ TEXERA USERBOT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum**: __Güncelleniyor..\n\n💌 UserBot'unuz daha iyi olacağınıza emin olabilirsiniz :) Bu işlem maksimum 10 dakika sürmektedir.__")
+        await m.edit("✨ HERLOCK USERBOT UPDATE ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum**: __Güncelleniyor..\n\n💌 UserBot'unuz daha iyi olacağınıza emin olabilirsiniz :) Bu işlem maksimum 10 dakika sürmektedir.__")
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
         heroku_git_url = heroku_app.git_url.replace(
@@ -279,7 +279,7 @@ async def asistan_update(c, m):
             await m.edit(f'{txt}\n`Karşılaşılan hatalar burada:\n{error}`')
             repo.__del__()
             return
-        await m.reply("✨ Texera UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
+        await m.reply("✨ Herlock UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
 
     else:
         # Klasik güncelleyici, oldukça basit.
@@ -288,7 +288,7 @@ async def asistan_update(c, m):
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
         await update_requirements()
-        await m.edit("✨ Texera UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
+        await m.edit("✨ Herlock UserBot Update ✨\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n❤️**Durum:** __Güncelleme başarıyla tamamlandı!\n\n🔄 Yeniden başlatılıyor...__")
         # Bot için Heroku üzerinde yeni bir instance oluşturalım.
         args = [sys.executable, "main.py"]
         execle(sys.executable, *args, environ)
