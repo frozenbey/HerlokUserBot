@@ -13,7 +13,7 @@ async def destek(client:Client, message:Message):
     girilen_yazi = message.text.split()
 
     if len(girilen_yazi) == 1:
-        mesaj = "**Nasıl kullanacağını öğrenmek için modül adı girmelisin!**\nÖrnek: `.texera afk`\n\n"
+        mesaj = "**Nasıl kullanacağını öğrenmek için modül adı girmelisin!**\nÖrnek: `.herlock afk`\n\n"
 
         mesaj += "**💫 Yüklü Pluginler:**\n\n\n"
         mesaj += eklentilerim()
@@ -31,7 +31,7 @@ async def logsalla(client:Client, message:Message):
     
     yanit_id = await yanitlanan_mesaj(message)
     await message.delete()
-    await client.send_document(chat_id=message.chat.id, document= f"@{SESSION_ADI}.log", caption="**TexeraUserBot Log**", reply_to_message_id=yanit_id)
+    await client.send_document(chat_id=message.chat.id, document= f"@{SESSION_ADI}.log", caption="**HerlockUserBot Log**", reply_to_message_id=yanit_id)
 
 @Client.on_message(filters.command(['env'], ['!','.','/']) & filters.me)
 async def envsalla(client:Client, message:Message):
