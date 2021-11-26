@@ -7,7 +7,7 @@ from pyrogram.types import Message
 
 
 
-@Client.on_message(filters.command(['texera'], ['!','.','/']) & filters.me)
+@Client.on_message(filters.command(['herlock'], ['!','.','/']) & filters.me)
 async def destek(client:Client, message:Message):
 
     girilen_yazi = message.text.split()
