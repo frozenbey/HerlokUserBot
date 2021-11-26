@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from pyrogram import Client, __version__
 
 
-print("TexeraUserBot Başlatılıyor...")
+print("HerlockUserBot Başlatılıyor...")
 
 def hata(yazi:str) -> None:
    print("[✗] {}".format(yazi))
@@ -43,7 +43,7 @@ HEROKU_APPNAME  = os.environ.get("HEROKU_APPNAME", str)
 HEROKU_APIKEY   = os.environ.get("HEROKU_APIKEY", str)
 HEROKU          = os.environ.get("HEROKU", str)
 
-UPSTREAM_REPO_URL = "https://github.com/sherlock-exe/TexeraUserBot.git"
+UPSTREAM_REPO_URL = "https://github.com/herlockexe/HerlockUserBot.git"
 LOGO = "https://telegra.ph/file/00efe339a87c53f1fe963.jpg"   
 
 if not os.path.isdir(INDIRME_ALANI): os.makedirs(INDIRME_ALANI)
@@ -80,16 +80,11 @@ TEMP_AYAR = {
 "AFK" : "0",
 "AFK_MSG": "Şu anda afkyım",
 "PLUGIN_MSG" : {
-    "info" : {"DEVS" : "[➽ѕнєяℓοϲκ⟢](https://t.me/sherlock_exe)"}
+    "info" : {"DEVS" : "[➽нєяℓοϲκ⟢](https://t.me/tht_herlock)"}
 }}
 
 ALIVE_MESSAGE = """
-⚙️ **TEXERA UserBot** __Sahibi İçin Çalışıyor. __⚙️
-
-
-✨**Bot Version:**  `{}`
-✨**Çalışma Süresi:**  `{}`
-✨**Plugin Sayısı:**  `{}`
+HerlockUserbot Sorunsuz Çalışıyor🎉
 """
 idm = None
 PATTERNS = "."
