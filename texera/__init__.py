@@ -84,7 +84,10 @@ TEMP_AYAR = {
 }}
 
 ALIVE_MESSAGE = """
-HerlockUserbot Sorunsuz Çalışıyor🎉
+SEN BENIMI ARIYODUN❓
+HerlockUserbot Sorunsuz Çalışıyor
+
+Bot Version : Herlock {BOT_VER}
 """
 idm = None
 PATTERNS = "."
@@ -136,6 +139,6 @@ def baslangic() -> None:
     basarili(f"{SESSION_ADI} {len(tum_eklentiler)} eklentiyle çalışıyor...\n")
     texera.stop()
 
-BOT_VER = "v0.1"
+BOT_VER = "v1.0"
 SURUM = f"{str(sys.version_info[0])}.{str(sys.version_info[1])}"
 #--->  <-----
