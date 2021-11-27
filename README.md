@@ -1,13 +1,13 @@
 <div align="center">
-  <img src="https://telegra.ph/file/7447d3f91a035ecadfa80.jpg" width="400" height="400">
+  <img src="https://i.hizliresim.com/q1foh9x.jpg" width="400" height="400">
   <h1> Herlock UserBot </h1>
 </div>
 <p align="center">
     Herlock UserBot, Telegramın en gelişmiş userbotu. 
     <br>
-        <a href="https://github.com/sherlock-exe/TexeraUserBot/blob/master/README.md#kurulum">| Kurulum</a> |
-        <a href="https://t.me/TexeraUserBot">Kanal </a> |
-        <a href="https://t.me/TexeraSupport">Destek</a> |
+        <a href="https://github.com/herlockexe/HerlockUserBot/blob/master/README.md#kurulum">| Kurulum</a> |
+        <a href="https://t.me/HerlockUserBot">Kanal </a> |
+        <a href="https://t.me/HerlockSupport">Destek</a> |
     <br>
 </p>
 
