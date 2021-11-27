@@ -1,9 +1,9 @@
 <div align="center">
   <img src="https://telegra.ph/file/7447d3f91a035ecadfa80.jpg" width="400" height="400">
-  <h1>Texera UserBot</h1>
+  <h1> Herlock UserBot </h1>
 </div>
 <p align="center">
-    Texera UserBot, Telegramın en gelişmiş userbotu. 
+    Herlock UserBot, Telegramın en gelişmiş userbotu. 
     <br>
         <a href="https://github.com/sherlock-exe/TexeraUserBot/blob/master/README.md#kurulum">| Kurulum</a> |
         <a href="https://t.me/TexeraUserBot">Kanal </a> |
@@ -18,18 +18,18 @@
 
 **Android:** 
 
-`bash <(curl -L https://bit.ly/TexeraUserBot)`
+`YAKINDA`
 
 **Online Kurulum**
 
-[![Run on Repl.it](https://replit.com/badge/github/ThorDev/OnlineAuto)](https://replit.com/@sherlock-exe/TexeraOnline#main.sh)
+`YAKINDA..!`
 
 ### Elle Kurulum 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/sherlock-exe/TexeraUserBot)
+`YAKINDA..!`
 
 ## Bilgilendirme
-***Herhangi bir istek & şikayet & öneriniz varsa [destek grubuna](https://t.me/TexeraSupport) ulaşabilirsiniz.***
+***Herhangi bir istek & şikayet & öneriniz varsa [destek grubuna](https://t.me/HerlockSupport) ulaşabilirsiniz.***
 
 ```
 #include <std/disclaimer.h>
@@ -38,13 +38,14 @@
     Bu bir açık kaynaklı projedir, yaptığınız her işlemden kendiniz sorumlusunuz. Kesinlikle UserBot yöneticileri sorumluluk kabul etmemektedir.
     TexeraUserBot kurarak bu sorumlulukları kabul etmiş sayılırsınız.
 
-```
+``
 
 ### Geliştiriciler
-  [➽ѕнєяℓοϲκ⟢](https://t.me/sherlock_exe)
+  [HERLOCK ABINIZ](https://t.me/tht_herlock)
 
 ## Credit
 Thanks for;
 
-No one 🤓
+[SHERLOCK](https://github.com/sherlock_exe)
+
 
