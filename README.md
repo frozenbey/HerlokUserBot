@@ -42,7 +42,7 @@
 
 ### Geliştiriciler
   [HERLOCK ABINIZ](https://t.me/tht_herlock)
-
+  [ŞAKİR ABINIZ](https://t.me/SakirBey1)
 ## Credit
 Thanks for;
 
