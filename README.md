@@ -46,6 +46,6 @@
 ## Credit
 Thanks for;
 
-[SHERLOCK](https://github.com/sherlock_exe)
+[SHERLOCK](https://github.com/sherlock-exe)
 
 
