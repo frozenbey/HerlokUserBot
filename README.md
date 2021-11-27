@@ -5,7 +5,7 @@
 <p align="center">
     Herlock UserBot, Telegramın en gelişmiş userbotu. 
     <br>
-        <a href="https://github.com/herlockexe/HerlockUserBot/blob/master/README.md#kurulum">| Kurulum</a> |
+        <a href="https://github.com/herlockexe/HerlockUserBot#kurulum">| Kurulum</a> |
         <a href="https://t.me/HerlockUserBot">Kanal </a> |
         <a href="https://t.me/HerlockSupport">Destek</a> |
     <br>
