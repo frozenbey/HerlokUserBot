@@ -87,7 +87,7 @@ ALIVE_MESSAGE = """
 SEN BENIMI ARIYODUN❓
 HerlockUserbot Sorunsuz Çalışıyor
 
-Bot Version : Herlock {BOT_VER}
+Seni Yalnız Bırakmam⚡
 """
 idm = None
 PATTERNS = "."
